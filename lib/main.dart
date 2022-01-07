@@ -1,36 +1,21 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:mufin/styles.dart';
+import 'package:mufin/ui/my_app.dart';
 
-import 'HomePage.dart';
-import 'LoginPage.dart';
+import 'di/components/service_locator.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await setPreferredOrientations();
+  await setupLocator();
+  return runZonedGuarded(() async {
+    runApp(MyApp());
+  }, (error, stack) {
+    print(stack);
+    print(error);
+  });
 }
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  static const String loginRoute = '/mufin/login';
-  static const String homeRoute = '/mufin';
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Welcome to Flutter',
-      theme: ThemeData.from(colorScheme: MuFinTheme.light),
-      darkTheme: ThemeData.from(colorScheme: MuFinTheme.dark),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      initialRoute: loginRoute,
-      routes: <String, WidgetBuilder>{
-        homeRoute: (context) => const HomePage(title: 'MuFin'),
-        loginRoute: (context) => const LoginPage()
-      }
-    );
-  }
-}
-
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
