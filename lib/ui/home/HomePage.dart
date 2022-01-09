@@ -66,7 +66,7 @@ class AppNavBar extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Accounts'),
+            title: const Text('Assets'),
             leading: const Icon(Icons.attach_money),
             onTap: () {
               Navigator.pop(context);

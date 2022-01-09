@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mufin/DTO/Transaction.dart';
+import 'package:mufin/models/transaction/transaction.dart';
 
 class TransactionsPage extends StatelessWidget {
   final List<Transaction> transactions;
@@ -16,8 +16,8 @@ class TransactionsPage extends StatelessWidget {
         children: [
           for (var transaction in transactions)
             ListTile(
-                title: Text(transaction.category),
-                subtitle: Text(transaction.currency + " " + transaction.cost.toString())
+                title: Text(transaction.category!),
+                subtitle: Text(transaction.currency! + " " + transaction.cost.toString())
             )
         ],
       ),
