@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lock_screen/flutter_lock_screen.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:mufin/Router/Routes.dart';
+import 'package:mufin/utils/routes/routes.dart';
 import 'package:mufin/data/sharedpref/constants/preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

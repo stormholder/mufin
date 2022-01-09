@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mufin/data/asset_repository.dart';
 import 'package:mufin/data/sharedpref/constants/preferences.dart';
-import 'package:mufin/Router/Routes.dart';
+import 'package:mufin/utils/routes/routes.dart';
 import 'package:mufin/data/repository.dart';
 import 'package:mufin/di/components/service_locator.dart';
+import 'package:mufin/stores/asset/asset_store.dart';
 import 'package:mufin/stores/user/user_store.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +19,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   final UserStore _userStore = UserStore(getIt<Repository>());
+  final AssetStore _assetStore = AssetStore(getIt<AssetRepository>());
 
   @override
   void initState() {
@@ -46,6 +49,18 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        Provider<AssetStore>(create: (_) => _assetStore),
+      ],
+      child: Observer(
+        name: 'global-observer',
+        builder: (context) => buildBody(context)
+      )
+    );
+  }
+
+  Widget buildBody(BuildContext context) {
     return MaterialApp(
       restorationScopeId: 'mufin_app',
       title: 'MuFin',

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:mufin/ui/assets/assets_page.dart';
 import 'package:mufin/ui/budgets/BudgetsPage.dart';
 import 'package:mufin/ui/overview/OverviewPage.dart';
 
@@ -62,6 +63,7 @@ class AppNavBar extends StatelessWidget {
             title: const Text('Overview'),
             leading: const Icon(Icons.pie_chart),
             onTap: () {
+              Navigator.pop(context);
               push(MaterialPageRoute(builder: (context) => OverviewPage()));
             },
           ),
@@ -70,6 +72,7 @@ class AppNavBar extends StatelessWidget {
             leading: const Icon(Icons.attach_money),
             onTap: () {
               Navigator.pop(context);
+              push(MaterialPageRoute(builder: (context) => AssetsPage()));
             },
           ),
           ListTile(
@@ -83,6 +86,7 @@ class AppNavBar extends StatelessWidget {
             title: const Text('Budgets'),
             leading: const Icon(Icons.bar_chart),
             onTap: () {
+              Navigator.pop(context);
               push(MaterialPageRoute(builder: (context) => BudgetsPage()));
             },
           ),

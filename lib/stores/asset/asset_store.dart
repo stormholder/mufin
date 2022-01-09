@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:mufin/data/asset_repository.dart';
+import 'package:mufin/models/asset/asset.dart';
 import 'package:mufin/models/asset/asset_list.dart';
 import 'package:mufin/stores/error/error_store.dart';
 
@@ -44,6 +45,21 @@ abstract class _AssetStore with Store {
       this.postList = postList;
     }).catchError((error) {
       errorStore.errorMessage = error.toString();//DioErrorUtil.handleError(error);
+    });
+  }
+
+  @action
+  Future insert(Asset asset) async {
+    final future = _repository.insert(asset);
+
+    future.then((value) {
+      if (postList == null) {
+        postList = AssetList(assets: List.filled(1, asset, growable: true));
+      } else {
+        postList!.assets!.add(asset);
+      }
+    }).catchError((error) {
+      errorStore.errorMessage = error.toString();
     });
   }
 }
